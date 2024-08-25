@@ -1,0 +1,11 @@
+cd CrawlingSpiderProject
+scrapy crawl spiderman -a url=https://en.wikipedia.org/wiki/Donald_Trump -a tag=target -a maxDepth=3 -O paths.json 
+
+
+Supported types:
+JSON
+CSV
+XML
+
+-O for overwrite mdoe
+-o for append mode

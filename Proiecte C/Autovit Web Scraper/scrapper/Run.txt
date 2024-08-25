@@ -1,0 +1,1 @@
+scrapy runspider "F:\Python\Autovit Web Scraper\scrapper\scrapper\spiders\spider1.py" -O "F:\Python\Autovit Web Scraper\scrapper\buffer.json"

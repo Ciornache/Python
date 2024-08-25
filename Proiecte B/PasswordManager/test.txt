@@ -1,0 +1,7 @@
+python pwmanager.py haina -add test Candale random
+python pwmanager.py haina -add test2 Silviu random2
+python pwmanager.py haina -get test
+python pwmanager.py haina -remove test
+python pwmanager.py haina -update test2 -username Stefan -password btc
+python pwmanager.py haina -list
+python pwmanager.py haina -remove test2

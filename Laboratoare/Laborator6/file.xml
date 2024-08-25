@@ -1,0 +1,7 @@
+<root>
+    <item class="url" name="url-form" data-id="item">Item 1</item>
+    <item class="url" name="url-form">Item 2</item>
+    <item class="url" name="url-form" data-id="item">Item 3</item>
+    <item class="url" name="url-form" data-id="other">Item 4</item>
+    <item class="other" name="url-form" data-id="item">Item 5</item>
+</root>

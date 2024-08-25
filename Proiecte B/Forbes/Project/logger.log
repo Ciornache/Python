@@ -1,0 +1,12 @@
+2024-08-07 17:55:53 - forbes_crawler.forbes - INFO: Waiting for the acces button to appear on the screen 
+2024-08-07 17:55:56 - forbes_crawler.forbes - INFO: Clicked the accept button 
+2024-08-07 17:55:56 - forbes_crawler.forbes - INFO: Waiting for the billionaires information to render 
+2024-08-07 17:56:21 - forbes_crawler.forbes - INFO: Collected all the billionaire links 
+2024-08-07 17:56:21 - forbes_crawler.forbes - INFO: Querying... 
+2024-08-07 17:56:22 - forbes_crawler.forbes - INFO: Filtering the billionaires... 
+2024-08-07 17:56:50 - forbes_crawler.forbes - INFO: Filtered the billionaires 
+2024-08-07 17:56:50 - forbes_crawler.forbes - INFO: Processing the billionaires! 
+2024-08-07 17:56:50 - forbes_crawler.forbes - INFO: Checking if the current url https://www.forbes.com/profile/elon-musk/?list=billionaires is valid 
+2024-08-07 17:56:56 - forbes_crawler.forbes - INFO: The url https://www.forbes.com/profile/elon-musk/?list=billionaires is valid 
+2024-08-07 17:56:57 - forbes_crawler.forbes - INFO: Collected all the information from the current url https://www.forbes.com/profile/elon-musk/?list=billionaires 
+2024-08-07 17:56:57 - forbes_crawler.forbes - INFO: Processing the billionaires and inserting them into the Database 

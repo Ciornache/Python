@@ -1,0 +1,9 @@
+__main__ - 25-08-24 | 15:57:10 - INFO - Initiating the API...
+werkzeug - 25-08-24 | 15:57:10 - WARNING -  * Debugger is active!
+werkzeug - 25-08-24 | 15:57:10 - INFO -  * Debugger PIN: 124-040-148
+__main__ - 25-08-24 | 15:57:10 - INFO - GET Request to /countries-with-english-language with url parameters
+werkzeug - 25-08-24 | 15:57:10 - INFO - 127.0.0.1 - - [25/Aug/2024 15:57:10] "GET /countries-with-english-language HTTP/1.1" 200 -
+__main__ - 25-08-24 | 15:58:24 - INFO - GET Request to /get-capital with url parameters ['France']
+werkzeug - 25-08-24 | 15:58:24 - INFO - 127.0.0.1 - - [25/Aug/2024 15:58:24] "GET /get-capital?countries=France HTTP/1.1" 200 -
+__main__ - 25-08-24 | 15:58:29 - INFO - GET Request to /get-capital with url parameters ['France', 'Romania']
+werkzeug - 25-08-24 | 15:58:29 - INFO - 127.0.0.1 - - [25/Aug/2024 15:58:29] "GET /get-capital?countries=France,Romania HTTP/1.1" 200 -

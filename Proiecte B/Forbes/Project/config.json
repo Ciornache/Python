@@ -1,0 +1,26 @@
+{
+    "version":1,
+    "disable_existing_loggers":false,
+    "formatters": {
+        "forbes": {
+            "format":"%(asctime)s - %(name)s - %(levelname)s: %(message)s ",
+            "datefmt": "%Y-%m-%d %H:%M:%S"
+        }
+    }, 
+    "handlers": {
+        "filepath": {
+            "formatter": "forbes",
+            "class":"logging.FileHandler",
+            "level":"INFO",
+            "filename":"logger.log",
+            "mode":"w", 
+            "encoding":"utf-8"
+        }       
+    },
+    "loggers": {
+        "root": {
+            "handlers":["filepath"],
+            "level":"INFO"
+        }
+    }
+}
