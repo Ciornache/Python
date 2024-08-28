@@ -1,8 +1,11 @@
-from PySide6.QtWidgets import QApplication, QDialog, QLineEdit
+from PySide6.QtWidgets import QApplication, QMessageBox
 import PySide6.QtTest as QtTest
 import sys 
 from PySide6 import QtCore
 from PySide6.QtUiTools import QUiLoader
+from PySide6.QtMultimedia import QSoundEffect
+from PySide6.QtCore import QUrl
+from pygame import mixer 
 
 loader = QUiLoader()
 
@@ -65,8 +68,28 @@ class Timer(QtCore.QObject):
             self.ui.lineEdit_4.setText(time[1])
             self.ui.lineEdit.setText(time[2])
             self.stop = not ok
+            if (time[0], time[1], time[2]) != ('00', '00', '00'):
+                QtTest.QTest.qWait(1000)
+            else:
+                QtTest.QTest.qWait(100)
 
-            QtTest.QTest.qWait(1000)
+        
+        filename = "F:\Python\Proiecte C\Timer\Sounds\Danger Alarm Sound Effect.mp3"
+        mixer.init()
+        mixer.music.load(filename=filename)
+        mixer.music.play()
+        count = 100000000
+        while count:
+            count = count - 1
+        mixer.music.stop()
+        mixer.music.unload()
+
+        messBox = QMessageBox()
+        messBox.setText('The timer has ended')
+        messBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        messBox.setWindowTitle('Info')
+        messBox.exec()
+        
 
 
     def stopButtonPressed(self):
@@ -89,6 +112,8 @@ class Timer(QtCore.QObject):
         time = sender.displayText()
         if len(time) != 2:
             sender.setText('0' + time)
+    
+        
 
     
 app = QApplication(sys.argv)
