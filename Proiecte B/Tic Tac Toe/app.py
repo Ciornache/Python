@@ -1,6 +1,5 @@
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtCore import QObject, QCoreApplication, Qt
-from PySide6.QtWidgets import QApplication, QPushButton
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QApplication
 import sys 
 from Ui_Objects.game import Game 
 from Ui_Objects.menu import Menu
@@ -19,18 +18,27 @@ class App:
         self.game.ui.hide()
     
     def createXGame(self) -> None:
-        self.game = Game(1)
-        self.game.ui.show()
-        self.menu.togglePressedButton()
-        self.menu.ui.hide()
-        self.game.ui.goBackButton.pressed.connect(self.showMenu)
+        try:
+            self.game = Game(1, self.menu.difficulty)
+        except:
+            self.game = Game(1)
+        finally:
+            self.game.ui.show()
+            self.menu.togglePressedButton()
+            self.menu.ui.hide()
+            self.game.ui.goBackButton.pressed.connect(self.showMenu)
+        
     
     def createOGame(self) -> None:
-        self.game = Game(2)
-        self.game.ui.show()
-        self.menu.togglePressedButton()
-        self.menu.ui.hide()
-        self.game.ui.goBackButton.pressed.connect(self.showMenu)
+        try:
+            self.game = Game(2, self.menu.difficulty)
+        except:
+            self.game = Game(2)
+        finally:
+            self.game.ui.show()
+            self.menu.togglePressedButton()
+            self.menu.ui.hide()
+            self.game.ui.goBackButton.pressed.connect(self.showMenu)
 
 
 if __name__ == '__main__':

@@ -1,21 +1,22 @@
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtCore import QObject
-from PySide6.QtWidgets import QApplication, QPushButton
-import sys 
+from PySide6.QtCore import QObject, QTimer, Qt
+from PySide6.QtWidgets import QPushButton
+from ai import AIPlayer
 
 class Game(QObject):
 
-    def __init__(self, turn) -> None:
+    def __init__(self, mode, difficulty = 0) -> None:
 
         # Loading the graphics
 
         super().__init__()
         loader = QUiLoader()
-        self.ui = loader.load("F:\\Python\\Proiecte B\\Tic Tac Toe\\Ui-Elements\\Game.ui")
+        self.ui = loader.load("F:\\Python\\Proiecte B\\Tic Tac Toe\\Ui_Design_Elements\\Game.ui")
         self.ui.setWindowTitle('Tic Tac Toe')
-        self.turn = turn
-        text = 'O TURN' if self.turn == 2 else 'X TURN'
-        self.ui.turnLabel.setText(text)
+        self.mode = mode
+        self.saveMode = self.mode
+        self.difficulty = difficulty
+        self.turn = 1
 
         # Extracting the Graphic Elements for future manipulation
 
@@ -31,10 +32,14 @@ class Game(QObject):
         self.goBackButton = self.ui.goBackButton
         self.playAgainButton = self.ui.playAgainButton        
         self.label = self.ui.turnLabel
+        self.buttons = [self.button11, self.button12, self.button13, self.button21, self.button22, self.button23, self.button31, self.button32, self.button33]
+
+        # Initializing the AI Player
+
+        self.aiPlayer = AIPlayer(self.buttons)
 
         # Initializing the Game State
 
-        self.buttons = [self.button11, self.button12, self.button13, self.button21, self.button22, self.button23, self.button31, self.button32, self.button33]
         for button in self.buttons:
             button.pressed.connect(self.buttonPressed)
             button.setCheckable(False)
@@ -43,7 +48,25 @@ class Game(QObject):
         self.playAgainButton.hide()
         self.goBackButton.hide()
 
+        # Initializing a Timer for AI Moves
+
+        self.timer = QTimer()
+        self.timer.setInterval(300)
+        self.timer.timeout.connect(self.checkForAiTurn)
+        self.timer.start()
+
+        # Initializing cursors
+
+        self.goBackButton.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.playAgainButton.setCursor(Qt.CursorShape.PointingHandCursor)
+
+
     def buttonPressed(self):
+
+        # Checking if it is AI Turn
+
+        if self.mode == 2 and self.difficulty:
+            return None
 
         sender:QPushButton = self.sender()
 
@@ -64,10 +87,8 @@ class Game(QObject):
 
         over:bool = self.updateGameState()
         if over:
-            for button in self.buttons:
-                button.setCheckable(True)
-            self.playAgainButton.show()
-            self.goBackButton.show()
+            self.endGame()
+            
     
     def updateGameState(self):
 
@@ -99,16 +120,22 @@ class Game(QObject):
             if (condition[0].text(), condition[1].text(), condition[2].text()) == ('O', 'O', 'O'):
                 self.label.setText('O WINS')
                 return True  
-                        
+            
+        freeSpots = len([btn for btn in self.buttons if not btn.isCheckable()])
+        
+        if freeSpots == 0:
+            self.label.setText('DRAW')
+            return True
+
         # Updating the player order
 
+        self.turn = 3 - self.turn
         if self.turn == 1:
             self.label.setText('X TURN')
         else:
             self.label.setText('O TURN')
         
-        self.turn = 3 - self.turn
-
+        self.mode = 3 - self.mode
         return False 
 
     
@@ -124,4 +151,25 @@ class Game(QObject):
             button.setText('')
 
         self.turn = 1
+        self.mode = self.saveMode
         self.label.setText('X TURN')
+        self.timer.start()
+    
+
+    def checkForAiTurn(self):
+        
+        # Handle AI Move
+        if self.mode == 2 and self.difficulty:
+            self.aiPlayer.makeMove(self.difficulty, self.turn)
+            over = self.updateGameState()
+            if over:
+                self.endGame()
+    
+    def endGame(self):
+
+        # Display the End Game State
+        for button in self.buttons:
+                button.setCheckable(True)
+        self.playAgainButton.show()
+        self.goBackButton.show()
+        self.timer.stop()
