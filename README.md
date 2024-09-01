@@ -75,8 +75,6 @@ These projects demonstrate advanced skills, such as integrating databases, build
     python main.py
     ```
 
-> **Note**: Each project folder contains specific instructions for setup and running the project. Please refer to the respective `README.md` files inside each project directory for more details.
-
 ---
 
 ## About Me
